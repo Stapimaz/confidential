@@ -11,40 +11,36 @@
 
 
 class Score{
-private:
-
-
 
 public:
     double whiteScore{0};
     double blackScore{0};
 
-    void calculateScore(const Board &currentBoard) {
-
-        for (int i = 0; i < 8; ++i) {
-
-            for (int j = 0; j < 8; ++j) {
+    void calculateScore(const Board &currentBoard) {            //board matrisinde gezilerek her bir taşın final değeri
+                                                                //bulunuyor ve birikerek beyazın ve siyahın son skorları bulunuyor
+        for (int satir = 0; satir < 8; ++satir) {
+            for (int sutun = 0; sutun < 8; ++sutun) {
                 Piece currentPiece;
-                currentPiece.firstPieceValue(i, j, currentBoard);
-                currentPiece.finalPieceValue(i, j, currentBoard);
+                currentPiece.firstPieceValue(satir, sutun, currentBoard);
+                currentPiece.finalPieceValue(satir, sutun, currentBoard);
 
-                if(currentPieceColor(i,j,currentBoard) == 'b')
+                if(currentPieceColor(satir,sutun,currentBoard) == 'b') //taş beyaz ise
                     whiteScore += currentPiece.finalValue;
-                else if(currentPieceColor(i,j,currentBoard) == 's')
+                else if(currentPieceColor(satir,sutun,currentBoard) == 's') //taş siyah ise
                     blackScore += currentPiece.finalValue;
 
-
+                std::cout << currentPiece.finalValue << "\n";
+                std::cout << satir << ", " << sutun << "\n\n";
 
             }
-
 
         }
 
     }
 
     void printScore(const Board &currentBoard, const std::string &outputfilename, const std::string &filename){
-
-        calculateScore(currentBoard);
+                                                            // calculateScore çağırarak son skorları hesaplatıyor
+        calculateScore(currentBoard);                       //bu skorları main'de belirtilen .txt'ye yazıyor.
 
         std::ofstream outputFile(outputfilename);
         if (outputFile.is_open()) {

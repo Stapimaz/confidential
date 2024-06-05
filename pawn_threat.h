@@ -12,26 +12,39 @@
 
 
 
-bool isPawnThreat(int posX, int posY, const Board &currentBoard) {
+bool isPawnThreat(int satir, int sutun, const Board &currentBoard) {   //mevcut taşın rakip piyon tarafından tehditini kontrol eden fonksiyon
 
-    std::string possibleThreatPiece;
+    std::string possibleThreatPiece;   //rakip piyon ps mi pb mi, mevcut piyonun son harfine bakılarak bulunuyor
 
-    if(currentPieceColor(posX, posY, currentBoard) == 'b')
+    if(currentPieceColor(satir, sutun, currentBoard) == 'b')
         possibleThreatPiece = "ps";
-    else if(currentPieceColor(posX, posY, currentBoard) == 's')
+    else if(currentPieceColor(satir, sutun, currentBoard) == 's')
         possibleThreatPiece = "pb";
+    std::cout << "Piece at (" << satir << ", " << sutun << "): " << possibleThreatPiece << "\n";
 
+        if(possibleThreatPiece == "ps") {                   //Rakip ps ise yukarı çaprazlardan saldırabilir, kontrol ediliyor
+            if (satir - 1 >= 0 && sutun - 1 >= 0 &&
+                currentBoard.board[satir - 1][sutun - 1] == "ps")
+                return true;
+            else if ((satir - 1 >= 0 && sutun + 1 < BOARD_SIZE) &&
+                currentBoard.board[satir - 1][sutun + 1] == "ps")
+                return true;
+            else
+                return false;
+        }
 
-                                                                                //piyon tehditinde mi
-        if(currentBoard.board[posX+1][posY+1] == possibleThreatPiece)
-            return true;
-        if(currentBoard.board[posX-1][posY+1] == possibleThreatPiece)
-            return true;
-
-
-         return false;
-
-
+        else if(possibleThreatPiece == "pb") {              //Rakip pb ise aşağı çaprazlardan saldırabilir, kontrol ediliyor
+              if (satir + 1 < BOARD_SIZE && sutun - 1 >= 0 &&
+              currentBoard.board[satir + 1][sutun - 1] == "pb"){
+                    return true;}
+              else if (satir + 1 < BOARD_SIZE && sutun + 1 < BOARD_SIZE &&
+                  currentBoard.board[satir + 1][sutun + 1] == "pb")
+                    return true;
+              else
+                  return false;
+        }
+        else
+            return false;
 }
 
 

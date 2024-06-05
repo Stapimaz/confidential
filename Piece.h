@@ -5,11 +5,8 @@
 #ifndef CSTECH_PIECE_H
 #define CSTECH_PIECE_H
 
-
 #include "board.h"
 #include "main_threat_check.h"
-
-
 
 
 class Piece {
@@ -17,15 +14,13 @@ class Piece {
 private:
     double firstValue{0};
 
-
-
 public:
     double finalValue{0};
 
-    void firstPieceValue(int posX, int posY, const Board &currentBoard) {
-        std::string piece = currentBoard.board[posX][posY];
-        char type = piece[0];
-        if (type == '-') {
+    void firstPieceValue(int satir, int sutun, const Board &currentBoard) {
+        std::string piece = currentBoard.board[satir][sutun];
+        char type = piece[0];                                   //board matrisindeki taşların ilk hanesine bakılarak
+        if (type == '-') {                                      //taşın türüne göre taşın ilk değerleri atanıyor
             firstValue = 0.0;
         } else {
             switch (type) {
@@ -53,20 +48,15 @@ public:
             }
         }
 
-        //DEBUG
-        std::cout << type << "   type \n";
-
-        //DEBUG
-        std::cout << firstValue << "   FrstVALUE \n";
 
     }
 
-    void finalPieceValue(int posX, int posY, const Board &currentBoard){
+    void finalPieceValue(int satir, int sutun, const Board &currentBoard){
 
-        if(isUnderThreat(posX, posY, currentBoard))
-            finalValue = firstValue*0.5;
+        if(isUnderThreat(satir, sutun, currentBoard)){
+            finalValue = firstValue*0.5;}                   //Tehdit varsa taşın değeri yarıya iniyor
         else
-            finalValue = firstValue;
+            finalValue = firstValue;                        //yoksa taşın değeri sabit kalıyor
 
     }
 

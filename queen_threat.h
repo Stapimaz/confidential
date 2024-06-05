@@ -13,90 +13,88 @@
 
 
 
-bool isQueenThreat(int posX, int posY, const Board &currentBoard) {
+bool isQueenThreat(int satir, int sutun, const Board &currentBoard) { //mevcut taş rakip vezir tarafından tehdit ediliyor mu kontrol eden fonks.
 
 
-    std::string possibleThreatPiece;
+    std::string possibleThreatPiece; //mevcut taşın son rengine göre rakip vs mi vb mi belirleniyor
 
-    if(currentPieceColor(posX, posY, currentBoard) == 'b')
+    if(currentPieceColor(satir, sutun, currentBoard) == 'b')
         possibleThreatPiece = "vs";
-    else if(currentPieceColor(posX, posY, currentBoard) == 's')
+    else if(currentPieceColor(satir, sutun, currentBoard) == 's')
         possibleThreatPiece = "vb";
 
 
-//VEZİR TEHDİTİ ALTINDA MI
 
-
-        // Check horizontally to the right
-        for (int i = posY + 1; i < 8; ++i) {
-            if (currentBoard.board[posX][i] == possibleThreatPiece) {
+                                                // mevcut taşın sağına bakılıyor
+        for (int i = sutun + 1; i < 8; ++i) {
+            if (currentBoard.board[satir][i] == possibleThreatPiece) {
                 return true;
-            } else if (currentBoard.board[posX][i] != "--") {
-                break; // another piece is blocking the way
+            } else if (currentBoard.board[satir][i] != "--") {
+                break; // vezirin yolunu kesen başka taş varsa tehdit edemez, break
             }
         }
 
-        // Check horizontally to the left
-        for (int i = posY - 1; i >= 0; --i) {
-            if (currentBoard.board[posX][i] == possibleThreatPiece) {
+                                             // mevcudun soluna bakılıyor
+        for (int i = sutun - 1; i >= 0; --i) {
+            if (currentBoard.board[satir][i] == possibleThreatPiece) {
                 return true;
-            } else if (currentBoard.board[posX][i] != "--") {
-                break; // another piece is blocking the way
+            } else if (currentBoard.board[satir][i] != "--") {
+                break;
             }
         }
 
-        // Check vertically upwards
-        for (int i = posX - 1; i >= 0; --i) {
-            if (currentBoard.board[i][posY] == possibleThreatPiece) {
+                                    // yukarı bakılıyor
+        for (int i = satir - 1; i >= 0; --i) {
+            if (currentBoard.board[i][sutun] == possibleThreatPiece) {
                 return true;
-            } else if (currentBoard.board[i][posY] != "--") {
-                break; // another piece is blocking the way
+            } else if (currentBoard.board[i][sutun] != "--") {
+                break;
             }
         }
 
-        // Check vertically downwards
-        for (int i = posX + 1; i < 8; ++i) {
-            if (currentBoard.board[i][posY] == possibleThreatPiece) {
+                                    // aşağı bakılıyor
+        for (int i = satir + 1; i < 8; ++i) {
+            if (currentBoard.board[i][sutun] == possibleThreatPiece) {
                 return true;
-            } else if (currentBoard.board[i][posY] != "--") {
-                break; // another piece is blocking the way
+            } else if (currentBoard.board[i][sutun] != "--") {
+                break;
             }
         }
 
 
-        // Check diagonally top-right
-        for (int i = 1; posX - i >= 0 && posY + i < 8; ++i) {
-            if (currentBoard.board[posX - i][posY + i] == possibleThreatPiece) {
+                                     // sağ üst çapraz
+        for (int i = 1; satir - i >= 0 && sutun + i < 8; ++i) {
+            if (currentBoard.board[satir - i][sutun + i] == possibleThreatPiece) {
                 return true;
-            } else if (currentBoard.board[posX - i][posY + i] != "--") {
-                break; // another piece is blocking the way
+            } else if (currentBoard.board[satir - i][sutun + i] != "--") {
+                break;
             }
         }
 
-        // Check diagonally top-left
-        for (int i = 1; posX - i >= 0 && posY - i >= 0; ++i) {
-            if (currentBoard.board[posX - i][posY - i] == possibleThreatPiece) {
+                                    // sol üst çapraz
+        for (int i = 1; satir - i >= 0 && sutun - i >= 0; ++i) {
+            if (currentBoard.board[satir - i][sutun - i] == possibleThreatPiece) {
                 return true;
-            } else if (currentBoard.board[posX - i][posY - i] != "--") {
-                break; // another piece is blocking the way
+            } else if (currentBoard.board[satir - i][sutun - i] != "--") {
+                break;
             }
         }
 
-        // Check diagonally bottom-right
-        for (int i = 1; posX + i < 8 && posY + i < 8; ++i) {
-            if (currentBoard.board[posX + i][posY + i] == possibleThreatPiece) {
+                                    // sağ alt çapraz
+        for (int i = 1; satir + i < 8 && sutun + i < 8; ++i) {
+            if (currentBoard.board[satir + i][sutun + i] == possibleThreatPiece) {
                 return true;
-            } else if (currentBoard.board[posX + i][posY + i] != "--") {
-                break; // another piece is blocking the way
+            } else if (currentBoard.board[satir + i][sutun + i] != "--") {
+                break;
             }
         }
 
-        // Check diagonally bottom-left
-        for (int i = 1; posX + i < 8 && posY - i >= 0; ++i) {
-            if (currentBoard.board[posX + i][posY - i] == "Q") {
+                                    // sol alt çapraz
+        for (int i = 1; satir + i < 8 && sutun - i >= 0; ++i) {
+            if (currentBoard.board[satir + i][sutun - i] == possibleThreatPiece) {
                 return true;
-            } else if (currentBoard.board[posX + i][posY - i] != ".") {
-                break; // another piece is blocking the way
+            } else if (currentBoard.board[satir + i][sutun - i] != "--") {
+                break;
             }
         }
     return false; // tehdit yoksa

@@ -10,36 +10,34 @@
 #include "current_color_check.h"
 
 
-bool isKnightThreat(int posX, int posY, const Board &currentBoard) {
+bool isKnightThreat(int satir, int sutun, const Board &currentBoard) { // mevcut taş rakip at tarafından tehdit ediliyor mu kontrol eden fonskyion
 
 
-    std::string possibleThreatPiece;
+    std::string possibleThreatPiece;  //mevcut taşın rengine bakılarak rakip as mi ab mi belirleniyor
 
-    if(currentPieceColor(posX, posY, currentBoard) == 'b')
+    if(currentPieceColor(satir, sutun, currentBoard) == 'b')
         possibleThreatPiece = "as";
-    else if(currentPieceColor(posX, posY, currentBoard) == 's')
+    else if(currentPieceColor(satir, sutun, currentBoard) == 's')
         possibleThreatPiece = "ab";
 
 
 
 
-    int knightMoves[8][2] = {
+    int knightMoves[8][2] = {  //atın yapabileceği tüm hareketler
             { -2, -1 }, { -1, -2 }, { 1, -2 }, { 2, -1 },
             { 2,  1 }, { 1,  2 }, { -1,  2 }, { -2,  1 }
     };
 
-    for (int i = 0; i < 8; ++i) {
-        int newX = posX + knightMoves[i][0];
-        int newY = posY + knightMoves[i][1];
-        if (newX >= 0 && newX < 8 && newY >= 0 && newY < 8) {
-            if (currentBoard.board[newX][newY] == possibleThreatPiece) {
+    for (int i = 0; i < 8; ++i) { //atın tehdit oluşturabileceği tüm konumlar kontrol ediliyor
+        int newSatir = satir + knightMoves[i][0];
+        int newSutun = sutun + knightMoves[i][1];
+        if (newSatir >= 0 && newSatir < 8 && newSutun >= 0 && newSutun < 8) {
+            if (currentBoard.board[newSatir][newSutun] == possibleThreatPiece) {
                 return true;
             }
         }
     }
     return false;
-
-
 
 }
 

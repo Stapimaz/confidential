@@ -5,14 +5,11 @@
 #ifndef CSTECH_BOARD_H
 #define CSTECH_BOARD_H
 
-
-
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <vector>
 #include <string>
-
 
 
 const int BOARD_SIZE = 8;
@@ -26,18 +23,18 @@ public:
 
 
     void importBoard(const std::string &filename) {
-        std::ifstream file(filename);
+        std::ifstream file(filename);    //mainde belirtilen isimdeki .txt okunuyor
         std::string line;
 
-        if (!file.is_open()) {
-            std::cerr << filename << "açılamadı, konumunu kontrol edin " << "\n";
-            return; // or handle the error accordingly
+        if (!file.is_open()) {          //öyle bir dosya yoksa uyarı veriyor
+            std::cerr << filename << "'in  .exe ile aynı konumda olduğunu kontrol edin " << "\n";
+            return;
         }
 
         for (int i = 0; i < BOARD_SIZE; ++i) {
-            if (std::getline(file, line)) { // Read a line from the file
+            if (std::getline(file, line)) { // dosyadan satır alıyor
                 int col = 0;
-                for (int j = 0; j < 22; j += 3) { // Increment by 3 to skip spaces
+                for (int j = 0; j < 22; j += 3) { // .txt'deki boşlukları atlayarak sadece bitişik şekilde taşların yazdığı bir matris oluşturuyor
                     board[i][col++] = std::string(1, line[j]) + std::string(1, line[j + 1]);
                 }
             } else {
@@ -48,7 +45,7 @@ public:
         file.close();
     }
 
-    void printBoard() const {
+    void printBoard() const {               //konsolda açılan dosyayı print ediyor, kontrol amaçlı
         for (int i = 0; i < BOARD_SIZE; ++i) {
             for (int j = 0; j < BOARD_SIZE; ++j) {
                 std::cout << board[i][j] << " ";
@@ -60,7 +57,6 @@ public:
 
 };
 
-char whichSide(int posX, int posY, const Board &currentBoard);
 
 #endif //CSTECH_BOARD_H
 
