@@ -10,8 +10,6 @@
 #include "current_color_check.h"
 
 
-
-
 bool isPawnThreat(int satir, int sutun, const Board &currentBoard) {   //mevcut taşın rakip piyon tarafından tehditini kontrol eden fonksiyon
 
     std::string possibleThreatPiece;   //rakip piyon ps mi pb mi, mevcut piyonun son harfine bakılarak bulunuyor
@@ -20,7 +18,6 @@ bool isPawnThreat(int satir, int sutun, const Board &currentBoard) {   //mevcut 
         possibleThreatPiece = "ps";
     else if(currentPieceColor(satir, sutun, currentBoard) == 's')
         possibleThreatPiece = "pb";
-    std::cout << "Piece at (" << satir << ", " << sutun << "): " << possibleThreatPiece << "\n";
 
         if(possibleThreatPiece == "ps") {                   //Rakip ps ise yukarı çaprazlardan saldırabilir, kontrol ediliyor
             if (satir - 1 >= 0 && sutun - 1 >= 0 &&

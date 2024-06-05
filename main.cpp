@@ -3,12 +3,9 @@
 #include "Score.h"
 
 
-
-
-
 int main() {
     Board board;
-    std::string filename = "board3.txt";
+    std::string filename = "board1.txt";
     board.importBoard(filename);    //Board açılıyor ve
     board.printBoard();             //konsola yazdırılıyor
 

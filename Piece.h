@@ -17,7 +17,11 @@ private:
 public:
     double finalValue{0};
 
-    void firstPieceValue(int satir, int sutun, const Board &currentBoard) {
+
+
+    void finalPieceValue(int satir, int sutun, const Board &currentBoard){
+
+
         std::string piece = currentBoard.board[satir][sutun];
         char type = piece[0];                                   //board matrisindeki taşların ilk hanesine bakılarak
         if (type == '-') {                                      //taşın türüne göre taşın ilk değerleri atanıyor
@@ -49,9 +53,14 @@ public:
         }
 
 
-    }
 
-    void finalPieceValue(int satir, int sutun, const Board &currentBoard){
+
+
+
+
+
+
+
 
         if(isUnderThreat(satir, sutun, currentBoard)){
             finalValue = firstValue*0.5;}                   //Tehdit varsa taşın değeri yarıya iniyor

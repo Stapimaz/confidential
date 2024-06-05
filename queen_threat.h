@@ -6,11 +6,8 @@
 #define CSTECH_QUEEN_THREAT_H
 
 
-
 #include "board.h"
 #include "current_color_check.h"
-
-
 
 
 bool isQueenThreat(int satir, int sutun, const Board &currentBoard) { //mevcut taş rakip vezir tarafından tehdit ediliyor mu kontrol eden fonks.

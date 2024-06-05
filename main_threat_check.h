@@ -6,13 +6,10 @@
 #define CSTECH_MAIN_THREAT_CHECK_H
 
 
-
-
 #include "board.h"
 #include "pawn_threat.h."
 #include "knight_threat.h"
 #include "queen_threat.h"
-
 
 
 bool isUnderThreat(int satir, int sutun, const Board &currentBoard){   //kontrol edilmesi gereken 3 tehdit durumu için
